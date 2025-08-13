@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/v1")
-@Tag(name = "users controller", description = "Endpoints for user operations")
+@Tag(name = "Users Controller", description = "Endpoints for user operations")
 public class UserController {
 	
     @GetMapping
