@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.studec.entity.User;
 import com.studec.repository.UserRepository;
 import com.studec.security.JWTService;
+import com.studec.security.UserPrincipal;
 
 import lombok.AllArgsConstructor;
 
@@ -42,8 +43,10 @@ public class UserService {
 	public String verify(User user) {
 		Authentication authentication = 
 				authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getMobile(), user.getPassword()));
+		
 		if(authentication.isAuthenticated()) {
-			return jwtService.generateToken(user.getMobile());
+			UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+			return jwtService.generateToken(userPrincipal);
 		}
 		return "failed";
 	}

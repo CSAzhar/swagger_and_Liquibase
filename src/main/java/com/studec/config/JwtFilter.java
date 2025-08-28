@@ -1,10 +1,12 @@
 package com.studec.config;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -33,20 +35,31 @@ public class JwtFilter extends OncePerRequestFilter{
 		String authHeader = request.getHeader("Authorization");
 		String token = null;
 		String username = null;
+//		List<String> roles = null;
 		
 		if(authHeader != null && authHeader.startsWith("Bearer ")) {
 			token = authHeader.substring(7);
 			username = jwtService.extractUsername(token);
+//			roles = jwtService.extractRoles(token);
 		}
 		
 		if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+			
 			UserDetails userDetails = context.getBean(MyUserDetailsService.class).loadUserByUsername(username);
+			
 			if(jwtService.validateToken(token, userDetails)) {
+				
+				List<SimpleGrantedAuthority> authorities = jwtService.getAllAuthorities(token);
+				
 				UsernamePasswordAuthenticationToken authToken = 
-						new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+						new UsernamePasswordAuthenticationToken(userDetails, 
+																	null, 
+																	authorities
+																	);
 				authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				SecurityContextHolder.getContext().setAuthentication(authToken);
 			}
+			
 		}
 		filterChain.doFilter(request, response);
 	}

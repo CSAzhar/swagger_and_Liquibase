@@ -19,7 +19,7 @@ public class MyUserDetailsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByMobile(username);
-		System.out.println("here user fethc - "+user);
+//		System.out.println("here user fethc - "+user);
 		if(user == null) {
 			System.out.println("User not found with  - "+username);
 			throw new UsernameNotFoundException("user not found");

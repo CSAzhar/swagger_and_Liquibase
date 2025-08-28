@@ -2,15 +2,19 @@ package com.studec.security;
 
 import java.util.Collection;
 
+
 import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.studec.entity.User;
 
 //=====================5-b (UserDetails)====================
+
 
 public class UserPrincipal implements UserDetails{
 
@@ -25,6 +29,7 @@ public class UserPrincipal implements UserDetails{
 
 	
 	public Collection<? extends GrantedAuthority> getAuthorities(){
+		System.out.println("User " + user.getMobile() + " has role: " + user.getRole().name());
 		return Collections.singleton(new SimpleGrantedAuthority("ROLE_"+user.getRole().name()));
 	}
 
