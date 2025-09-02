@@ -26,7 +26,6 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JWTService {
 	
-	
 	private String secretKey = "";
 	
 	public JWTService() {
@@ -40,14 +39,11 @@ public class JWTService {
 	}
 
 	public String generateToken(UserPrincipal userPrincipal) {
-		
 		Map<String, Object> claims = new HashMap<>();
-		
 		claims.put("roles", userPrincipal.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList()));
-
 		return Jwts
 				.builder()
 				.claims()
@@ -58,7 +54,6 @@ public class JWTService {
 				.and()
 				.signWith(getSignWithKey())
 				.compact();
-	
 	}
 
 	private SecretKey getSignWithKey() {

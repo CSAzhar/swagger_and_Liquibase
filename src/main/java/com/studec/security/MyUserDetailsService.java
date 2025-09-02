@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 import com.studec.entity.User;
@@ -24,8 +25,14 @@ public class MyUserDetailsService implements UserDetailsService{
 			System.out.println("User not found with  - "+username);
 			throw new UsernameNotFoundException("user not found");
 		}
-		
+//		UserDetails user1 = org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder()
+//				.username("azhar")
+//				.password("azhar")
+//				.roles("USER")
+//				.build();
+//		
 		return new UserPrincipal(user);
+//		return (UserDetails) new InMemoryUserDetailsManager(user1);   <- when using in memory userdetails
 	}
 	
 	//=====================5-a (UserDetails)====================

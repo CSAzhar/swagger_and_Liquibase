@@ -29,7 +29,7 @@ public class UserPrincipal implements UserDetails{
 
 	
 	public Collection<? extends GrantedAuthority> getAuthorities(){
-		System.out.println("User " + user.getMobile() + " has role: " + user.getRole().name());
+//		System.out.println("User " + user.getMobile() + " has role: " + user.getRole().name());
 		return Collections.singleton(new SimpleGrantedAuthority("ROLE_"+user.getRole().name()));
 	}
 
