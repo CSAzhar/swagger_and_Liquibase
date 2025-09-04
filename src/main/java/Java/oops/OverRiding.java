@@ -20,6 +20,7 @@ public class OverRiding extends y{
 	public static void main(String[] args) {
 		OverRiding o = new OverRiding();
 		o.print();
+		System.out.println("over rideen mathods");
 	}
 
 }
