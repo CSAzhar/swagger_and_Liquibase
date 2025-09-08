@@ -22,6 +22,7 @@ public class Overloading {
 		
 		Overloading over = new Overloading();
 		over.m1("azhar", "Uddin", "ali", "Gaya");
+		System.out.println("From main method");
 		
 	}
 
