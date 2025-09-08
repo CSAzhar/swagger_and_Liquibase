@@ -14,6 +14,9 @@ public class Overloading {
 	public void m1(String a, String b, String c) {
 		System.out.println("from arg -3 "+a+" - "+b+" - "+c);
 	}
+	public void m2(String a, String b, String c) {
+		System.out.println("from arg -3 "+a+" - "+b+" - "+c);
+	}
 	public void m1(String... str) {
 		System.out.println("from var arg");
 	}
